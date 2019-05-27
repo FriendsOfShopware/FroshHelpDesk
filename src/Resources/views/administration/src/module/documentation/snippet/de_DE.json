@@ -1,0 +1,14 @@
+{
+  "documentation": {
+    "header": {
+      "language switch-de": "Deutsch",
+      "language switch-en": "Englisch"
+    },
+    "menu": {
+      "documentation": "Dokumentation"
+    },
+    "error": {
+      "title": "Ein unbekannter Fehler ist aufgetreten"
+    }
+  }
+}

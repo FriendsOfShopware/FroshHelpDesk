@@ -1,0 +1,59 @@
+@import '~scss/variables';
+
+.issue-modal {
+  .author {
+    text-align: right;
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+  .title {
+    .title-headline {
+      font-weight: bolder;
+      font-size: larger;
+      margin-bottom: 0.5em;
+    }
+  }
+  .message {
+    .message-headline {
+      font-weight: bold;
+      font-size: larger;
+      margin-bottom: 0.5em;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+    pre {
+      margin-top: 1.25em;
+      margin-bottom: 1.25em;
+      white-space: pre-wrap;
+      background-color: #f9f9f9;
+      font-family: monospace, monospace;
+      font-size: 1em;
+      padding: 2.5em;
+      border-radius: .25em;
+    }
+  }
+}
+.comment-modal {
+  .author {
+    text-align: right;
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+  .message {
+    p {
+      margin-bottom: 10px;
+    }
+    pre {
+      margin-top: 1.25em;
+      margin-bottom: 1.25em;
+      white-space: pre-wrap;
+      background-color: #f9f9f9;
+      font-family: monospace, monospace;
+      font-size: 1em;
+      padding: 2.5em;
+      border-radius: .25em;
+    }
+  }
+}

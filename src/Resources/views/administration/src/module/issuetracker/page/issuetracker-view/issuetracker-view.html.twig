@@ -1,0 +1,154 @@
+<sw-page class="issuetracker-index">
+    <template slot="smart-bar-actions">
+        <sw-button variant="primary" @click="addTicket">
+            {{ $tc('issuetracker.buttons.create ticket') }}
+        </sw-button>
+    </template>
+
+    <template slot="content">
+        <sw-data-grid
+                :showSelection="false"
+                :dataSource="issues"
+                :fullPage="true"
+                :columns="columns">
+            <template slot="actions" slot-scope="{ item }">
+                <sw-context-menu-item @click="openIssue(item)">
+                    {{ $tc('issuetracker.buttons.open') }}
+                </sw-context-menu-item>
+                <sw-context-menu-item @click="addComment(item)">
+                    {{ $tc('issuetracker.buttons.create comment') }}
+                </sw-context-menu-item>
+                <sw-context-menu-item v-if="item.comments && item.comments.length > 0" @click="openComments(item)">
+                    {{ $tc('issuetracker.buttons.show comments') }}
+                </sw-context-menu-item>
+            </template>
+            <template slot="pagination">
+                <sw-pagination :page="page"
+                               :limit="limit"
+                               :total="total"
+                               @page-change="onPageChange">
+                </sw-pagination>
+            </template>
+        </sw-data-grid>
+        <sw-modal v-if="ticketDetails" @modal-close="closeIssue" :title="issue.key" variant="large">
+            <div class="issue-modal">
+                <div class="author">
+                    {{ $tc('issuetracker.modal.from') }} <b>{{ issue.reporter }}</b> {{ $tc('issuetracker.modal.at') }} <b>{{ issue.creationDate }}</b>
+                </div>
+                <div class="title">
+                    <div class="title-headline">{{ $tc('issuetracker.modal.title') }}:</div>
+                    <sw-card>
+                        <div class="title" v-html="issue.title"></div>
+                    </sw-card>
+                </div>
+                <div class="message">
+                    <div class="message-headline">{{ $tc('issuetracker.modal.message') }}:</div>
+                    <sw-card>
+                        <div v-html="issue.message"></div>
+                    </sw-card>
+                </div>
+            </div>
+            <template slot="modal-footer">
+                <sw-button size="small" @click="addComment(issue)" variant="primary">
+                    {{ $tc('issuetracker.buttons.create comment') }}
+                </sw-button>
+                <sw-button v-if="issue.comments.length > 0" size="small" @click="openComments(issue)">
+                    {{ $tc('issuetracker.buttons.show comments') }}
+                </sw-button>
+                <sw-button size="small" @click="closeIssue">
+                    {{ $tc('issuetracker.buttons.close') }}
+                </sw-button>
+            </template>
+        </sw-modal>
+        <sw-modal v-if="ticketComments" @modal-close="closeComments" :title="issue.key" variant="large">
+            <template v-for="comment in issue.comments">
+                <div class="comment-modal">
+                    <div class="author">
+                        {{ $tc('issuetracker.modal.from') }} <b>{{ comment.author }}</b> {{ $tc('issuetracker.modal.at') }} <b>{{ comment.creationDate }}</b>
+                    </div>
+                    <sw-card>
+                        <div class="message">
+                            <div v-html="comment.message"></div>
+                        </div>
+                    </sw-card>
+                </div>
+            </template>
+            <template slot="modal-footer">
+                <sw-button size="small" @click="addComment">
+                    {{ $tc('issuetracker.buttons.create comment') }}
+                </sw-button>
+                <sw-button size="small" @click="closeComments">
+                    {{ $tc('issuetracker.buttons.close') }}
+                </sw-button>
+            </template>
+        </sw-modal>
+        <sw-modal v-if="ticketAddComment" @modal-close="closeAddComment" :title="issue.key">
+            <div class="add-comment-modal">
+                <sw-field :label="$tc('issuetracker.modal.name')"
+                          validation="required"
+                          v-model="commentCreation.name">
+                </sw-field>
+                <sw-field :label="$tc('issuetracker.modal.email')"
+                          validation="required"
+                          v-model="commentCreation.email">
+                </sw-field>
+                <sw-textarea-field :label="$tc('issuetracker.modal.message')"
+                                   v-model="commentCreation.message">
+                </sw-textarea-field>
+            </div>
+            <template slot="modal-footer">
+                <sw-button v-if="issue.comments && issue.comments.length > 0" size="small" @click="openComments(issue)">
+                    {{ $tc('issuetracker.buttons.show comments') }}
+                </sw-button>
+                <sw-button size="small" @click="createComment" variant="primary">
+                    {{ $tc('issuetracker.buttons.save') }}
+                </sw-button>
+                <sw-button size="small" @click="closeAddComment">
+                    {{ $tc('issuetracker.buttons.close') }}
+                </sw-button>
+            </template>
+        </sw-modal>
+        <sw-modal v-if="createTicket" @modal-close="closeCreateTicket" variant="large">
+            <div class="create-ticket-modal">
+                <sw-card>
+                    <sw-radio-field :label="$tc('issuetracker.modal.ticket type')"
+                                    :options="ticketType"
+                                    v-model="ticketCreation.ticketType">
+                    </sw-radio-field>
+                    <sw-field :label="$tc('issuetracker.modal.name')"
+                              validation="required"
+                              v-model="ticketCreation.name">
+                    </sw-field>
+                    <sw-field :label="$tc('issuetracker.modal.email')"
+                              validation="required"
+                              v-model="ticketCreation.email">
+                    </sw-field>
+                </sw-card>
+                <sw-card>
+                    <sw-field :label="$tc('issuetracker.modal.title')"
+                              validation="required"
+                              v-model="ticketCreation.title">
+                    </sw-field>
+                    <sw-textarea-field :label="$tc('issuetracker.modal.message')"
+                                       v-model="ticketCreation.message">
+                    </sw-textarea-field>
+                </sw-card>
+            </div>
+            <template slot="modal-footer">
+                <sw-button size="small" @click="createIssue" variant="primary">
+                    {{ $tc('issuetracker.buttons.save') }}
+                </sw-button>
+                <sw-button size="small" @click="closeCreateTicket">
+                    {{ $tc('issuetracker.buttons.close') }}
+                </sw-button>
+            </template>
+        </sw-modal>
+    </template>
+    <sw-sidebar slot="sidebar">
+            <sw-sidebar-item
+                    icon="default-arrow-360-left"
+                    :title="'Refresh'"
+                    @click="getList">
+            </sw-sidebar-item>
+    </sw-sidebar>
+</sw-page>

@@ -1,0 +1,41 @@
+{
+  "issuetracker": {
+    "grid-columns": {
+      "type": "Typ",
+      "title": "Titel",
+      "comments": "Kommentare",
+      "votes": "Votes",
+      "status": "Status",
+      "fixVersion": "Version"
+
+    },
+    "buttons": {
+    	"show comments": "Kommentare anzeigen",
+    	"close": "Schließen",
+    	"open": "Öffnen",
+    	"create ticket": "Ticket einstellen",
+        "create comment": "Kommentar hinzufügen",
+        "save": "Speichern"
+    },
+    "modal": {
+      "from": "von",
+      "at": "am",
+      "message": "Nachricht",
+      "title": "Titel",
+      "name": "Name",
+      "email": "E-Mail",
+      "ticket type": "Ticket Typ",
+      "story": "Verbesserung",
+      "bug": "Fehler",
+      "security": "Security",
+      "idea": "Idee"
+    },
+    "menu": {
+      "service": "Service / Hilfe",
+      "issuetracker": "Issuetracker"
+    },
+    "error": {
+      "title": "Ein unbekannter Fehler ist aufgetreten"
+    }
+  }
+}

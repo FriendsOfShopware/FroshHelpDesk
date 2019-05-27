@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service class="GuzzleHttp\Client" id="shopware.documentation.api_client">
+            <argument key="$config" type="collection">
+                <argument key="base_uri">https://api.shopware.com</argument>
+                <argument key="headers" type="collection">
+                    <argument key="Content-Type" type="string">application/json</argument>
+                    <argument key="ACCEPT" type="string">application/vnd.api+json,application/json</argument>
+                </argument>
+            </argument>
+        </service>
+        <service id="FroshHelpDesk\Service\DocumentationService">
+            <argument type="service" id="shopware.documentation.api_client" />
+        </service>
+        <service id="FroshHelpDesk\Service\IssuetrackerService">
+            <argument type="service" id="shopware.documentation.api_client" />
+        </service>
+        <service id="FroshHelpDesk\Controller\Documentation" public="true">
+            <argument type="service" id="FroshHelpDesk\Service\DocumentationService" />
+        </service>
+        <service id="FroshHelpDesk\Controller\Issuetracker" public="true">
+            <argument type="service" id="FroshHelpDesk\Service\IssuetrackerService" />
+        </service>
+    </services>
+</container>

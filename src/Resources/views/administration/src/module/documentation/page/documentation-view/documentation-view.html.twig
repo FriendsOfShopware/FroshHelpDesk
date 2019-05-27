@@ -1,0 +1,73 @@
+<sw-page class="documentation-index">
+    <template slot="smart-bar-actions">
+        <sw-button v-if="language == 'en'" @click="changeLanguage" variant="primary">
+            {{ $tc('documentation.header.language switch-de') }}
+        </sw-button>
+        <sw-button v-if="language == 'de'" @click="changeLanguage" variant="primary">
+            {{ $tc('documentation.header.language switch-en') }}
+        </sw-button>
+    </template>
+    <sw-card-view slot="content">
+        <sw-card v-if="content.contentType == 'topCategory'||content.contentType == 'category'||content.contentType == 'childCategory'">
+            <div class="doc-content">
+                <h1>{{ content.requestedLocalization.title }}</h1>
+                <div>
+                    <div v-html="content.requestedLocalization.content"></div>
+                </div>
+            </div>
+        </sw-card>
+        <sw-card v-if="content.contentType == 'entry'">
+            <div class="doc-content">
+                <h1>{{ content.requestedLocalization.requestedVersion.title }}</h1>
+                <div>
+                    <div v-html="content.requestedLocalization.requestedVersion.content"></div>
+                </div>
+            </div>
+        </sw-card>
+        <sw-card v-if="content.contentType == 'topCategory'">
+            <sw-grid slot="grid" :items="categoryChilds" :selectable="false">
+                <!-- Grid columns definition -->
+                <template slot="columns" slot-scope="{ item }">
+                    <sw-grid-column flex="minmax(200px, 1fr)" label="Title">
+                        <router-link :to="{ name: 'sw.documentation.index', query: {
+                        seoUrl: item.requestedLocalization.seoUrl,
+                        language: item.requestedLocalization.locale.name.substring(0,2)
+                        } }">
+                            <strong>{{ item.requestedLocalization.title }}</strong>
+                        </router-link>
+                    </sw-grid-column>
+                </template>
+            </sw-grid>
+        </sw-card>
+        <sw-card v-if="content.contentType == 'category'">
+            <sw-grid slot="grid" :items="categoryChilds" :selectable="false">
+                <!-- Grid columns definition -->
+                <template slot="columns" slot-scope="{ item }">
+                    <sw-grid-column flex="minmax(200px, 1fr)" label="Title">
+                        <router-link :to="{ name: 'sw.documentation.index', query: {
+                        seoUrl: item.requestedLocalization.seoUrl,
+                        language: item.requestedLocalization.locale.name.substring(0,2)
+                        } }">
+                            <strong>{{ item.requestedLocalization.title }}</strong>
+                        </router-link>
+                    </sw-grid-column>
+                </template>
+            </sw-grid>
+        </sw-card>
+        <sw-card v-if="content.contentType == 'childCategory' && entries.length > 0">
+            <sw-grid slot="grid" :items="entries" :isFullpage="false" :selectable="false">
+                <!-- Grid columns definition -->
+                <template slot="columns" slot-scope="{ item }">
+                    <sw-grid-column flex="minmax(200px, 1fr)" label="Title">
+                        <router-link :to="{ name: 'sw.documentation.index', query: {
+                        seoUrl: item.requestedLocalization.seoUrl,
+                        language: item.requestedLocalization.locale.name.substring(0,2)
+                        } }">
+                            <strong>{{ item.requestedLocalization.latestVersion.navigationTitle }}</strong>
+                        </router-link>
+                    </sw-grid-column>
+                </template>
+            </sw-grid>
+        </sw-card>
+    </sw-card-view>
+</sw-page>

@@ -1,0 +1,14 @@
+{
+    "documentation": {
+        "header": {
+            "language switch-de": "German",
+            "language switch-en": "English"
+        },
+        "menu": {
+          "documentation": "Documentation"
+        },
+        "error": {
+            "title": "An unknown error occured"
+        }
+    }
+}

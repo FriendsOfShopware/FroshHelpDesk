@@ -1,0 +1,32 @@
+{
+    "name": "frosh/help-desk",
+    "description": "FroshHelpDesk",
+    "version": "1.0.0",
+    "type": "shopware-platform-plugin",
+    "keywords": [ "Issuetracker", "Bugtracker", "Dokumentation", "Documentation" ],
+    "description": "Issuetracker & Documentation in the new admin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "FriendsOfShopware",
+            "homepage": "https://friendsofshopware.de"
+        }
+    ],
+    "extra": {
+        "shopware-plugin-class": "FroshHelpDesk\\FroshHelpDesk",
+        "copyright": "FriendsOfShopware",
+        "label": {
+            "de-DE": "HelpDesk",
+            "en-GB": "HelpDesk"
+        },
+        "description": {
+            "de_DE": "Mit diesem Plugin kannst du dir die offizielle Dokumentation in der Administration anschauen. Zudem ermöglicht es dir einzelne Tickets in unseren Issuetracker einzustellen.",
+            "en_GB": "With this plugin you can view the official documentation in the administration. It also allows you to add individual tickets to our issue tracker."
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "FroshHelpDesk\\": "src/"
+        }
+    }
+}

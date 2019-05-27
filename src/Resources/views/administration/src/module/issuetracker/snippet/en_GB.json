@@ -1,0 +1,40 @@
+{
+    "issuetracker": {
+        "grid-columns": {
+            "type": "Type",
+            "title": "Title",
+            "comments": "Comments",
+            "votes": "Votes",
+            "status": "Status",
+            "fixVersion": "Version"
+        },
+        "buttons": {
+            "show comments": "Show Comments",
+            "close": "Close",
+            "open": "Open",
+            "create ticket": "Create Ticket",
+            "create comment": "Add Comment",
+            "save": "Save"
+        },
+        "modal": {
+            "from": "From",
+            "at": "At",
+            "message": "Message",
+            "title": "Title",
+            "name": "Name",
+            "email": "E-Mail",
+            "ticketType": "Ticket Type",
+            "story": "Story",
+            "bug": "Bug",
+            "security": "Security",
+            "idea": "Idea"
+        },
+        "menu": {
+          "service": "Service / Support",
+          "issuetracker": "Issuetracker"
+        },
+        "error": {
+            "title": "An unknown error occured"
+        }
+    }
+}
