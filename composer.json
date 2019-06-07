@@ -1,6 +1,5 @@
 {
     "name": "frosh/help-desk",
-    "description": "FroshHelpDesk",
     "version": "1.0.0",
     "type": "shopware-platform-plugin",
     "keywords": [ "Issuetracker", "Bugtracker", "Dokumentation", "Documentation" ],
