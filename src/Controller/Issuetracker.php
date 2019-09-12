@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Shopware\Core\Framework\Routing\Annotation\RouteScope;
 use FroshHelpDesk\Service\IssuetrackerService;
 
 class Issuetracker extends AbstractController
@@ -22,6 +23,7 @@ class Issuetracker extends AbstractController
 
 
     /**
+     * @RouteScope(scopes={"api"})
      * @Route("/api/v{version}/_action/frosh/issuetracker/getIssues",
      *     name="api.action.frosh.get-issues",
      *     methods={"GET"}
@@ -35,6 +37,7 @@ class Issuetracker extends AbstractController
     }
 
     /**
+     * @RouteScope(scopes={"api"})
      * @Route("/api/v{version}/_action/frosh/issuetracker/createIssue",
      *     name="api.action.frosh.create-issue",
      *     methods={"POST"}
@@ -48,6 +51,7 @@ class Issuetracker extends AbstractController
     }
 
     /**
+     * @RouteScope(scopes={"api"})
      * @Route("/api/v{version}/_action/frosh/issuetracker/createComment",
      *     name="api.action.frosh.create-comment",
      *     methods={"POST"}
