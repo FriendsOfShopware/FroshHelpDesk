@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Shopware\Core\Framework\Routing\Annotation\RouteScope;
 use FroshHelpDesk\Service\DocumentationService;
 
 class Documentation extends AbstractController
@@ -22,6 +23,7 @@ class Documentation extends AbstractController
 
 
     /**
+     * @RouteScope(scopes={"api"})
      * @Route("/api/v{version}/_action/frosh/documentation/getTopCategories",
      *     name="api.action.frosh.get-top-categories",
      *     methods={"GET"}
@@ -35,6 +37,7 @@ class Documentation extends AbstractController
     }
 
     /**
+     * @RouteScope(scopes={"api"})
      * @Route("/api/v{version}/_action/frosh/documentation/getContent",
      *     name="api.action.frosh.get-content",
      *     methods={"GET"})
@@ -69,6 +72,7 @@ class Documentation extends AbstractController
 
 
     /**
+     * @RouteScope(scopes={"api"})
      * @Route("/api/v{version}/_action/frosh/documentation/getChildCategories",
      *     name="api.action.frosh.get-child-categories",
      *     methods={"GET"})
