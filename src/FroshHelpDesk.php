@@ -9,13 +9,6 @@ use Symfony\Component\Config\FileLocator;
 
 class FroshHelpDesk extends Plugin {
 
-    public function build(ContainerBuilder $container): void
-    {
-        parent::build($container);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/DependencyInjection/'));
-        $loader->load('services.xml');
-    }
-
     /**
      * {@inheritdoc}
      */
